@@ -84,8 +84,8 @@ export default function RootLayout({ children }) {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                 <li><a href="/">Homepage</a></li>
-                <li><a href="/form">Product</a></li>
-                <li><a href="/history">Contact</a></li>
+                <li><a href="/product">Product</a></li>
+                <li><a href="/contact">Contact</a></li>
               </ul>
             </div>
           </div>

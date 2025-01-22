@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Dashboard() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -13,8 +13,8 @@ export default function Dashboard() {
   ];
 
   const catalogImages = [
-    { src: "/images/catalog1.jpg", alt: "Catalog Item 1", label: "Catalog Item 1" },
-    { src: "/images/catalog2.jpg", alt: "Catalog Item 2", label: "Catalog Item 2" },
+    { src: "/images/banner1.jpg", alt: "Catalog Item 1", label: "Catalog Item 1" },
+    { src: "/images/banner1.jpg", alt: "Catalog Item 2", label: "Catalog Item 2" },
     { src: "/images/catalog3.jpg", alt: "Catalog Item 3", label: "Catalog Item 3" },
     { src: "/images/catalog4.jpg", alt: "Catalog Item 4", label: "Catalog Item 4" },
   ];
@@ -32,6 +32,11 @@ export default function Dashboard() {
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
+
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
 
   return (
     <div className="dashboard">
@@ -59,8 +64,10 @@ export default function Dashboard() {
             <Image
               src="/images/sparepart1.png"
               alt="Sparepart 1"
+              layout="responsive"
               width={200}
               height={200}
+              objectFit="cover"
               className="sparepart-image"
             />
             <p>Sparepart 1</p>
@@ -70,8 +77,10 @@ export default function Dashboard() {
             <Image
               src="/images/sparepart2.jpg"
               alt="Sparepart 2"
+              layout="responsive"
               width={200}
               height={200}
+              objectFit="cover"
               className="sparepart-image"
             />
             <p>Sparepart 2</p>
@@ -81,8 +90,10 @@ export default function Dashboard() {
             <Image
               src="/images/sparepart3.jpg"
               alt="Sparepart 3"
+              layout="responsive"
               width={200}
               height={200}
+              objectFit="cover"
               className="sparepart-image"
             />
             <p>Sparepart 3</p>
@@ -95,7 +106,7 @@ export default function Dashboard() {
 
       <div className="hero-container flex w-full">
         {/* Hero Section */}
-        <div className="hero bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 min-h-screen text-white flex flex-col items-center justify-center relative w-2/3 overflow-hidden">
+        <div className="hero bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 min-h-screen text-white flex flex-col items-center justify-center relative w-full overflow-hidden">
           {/* Background Overlay */}
           <div className="absolute inset-0 bg-black opacity-40"></div>
 
@@ -127,7 +138,7 @@ export default function Dashboard() {
         </div>
 
         {/* Sidebar Section (on the right side) */}
-        <div className="sidebar w-1/3 flex flex-col justify-center p-8">
+        <div className="sidebar w-full flex flex-col justify-center p-8">
           <Image
             src="/images/hero1.jpg"
             alt="Sidebar Image"
@@ -150,8 +161,10 @@ export default function Dashboard() {
               <Image
                 src={item.src}
                 alt={item.alt}
+                layout="responsive"
                 width={300}
                 height={300}
+                objectFit="cover"
                 className="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
               />
               <p className="text-center mt-2">{item.label}</p>
@@ -173,24 +186,26 @@ export default function Dashboard() {
 
       <style jsx>{`
         .dashboard {
-          padding: 20px;
+          padding: 0;
           font-family: 'Roboto', sans-serif;
           background: linear-gradient(to right, #f7f7f7, #e0e0e0);
           color: #333;
+          width: 100vw;
+          overflow-x: hidden;
         }
 
         .slider {
           position: relative;
-          width: 100%;
+          width: 100vw;
           margin-bottom: 40px;
           border: 2px solid #bdc3c7;
-          border-radius: 10px;
+          border-radius: 0;
           overflow: hidden;
         }
 
         .slide-container {
           position: relative;
-          width: 100%;
+          width: 100vw;
           height: 400px;
           overflow: hidden;
         }
@@ -231,12 +246,13 @@ export default function Dashboard() {
         .sparepart-listing {
           text-align: center;
           margin-top: 40px;
+          width: 100vw;
         }
 
         .section-title {
           font-size: 2.5rem;
           font-weight: bold;
-          color: #2c3e50;
+          color: #e74c3c;
           margin-bottom: 20px;
           text-transform: uppercase;
           letter-spacing: 2px;
@@ -246,16 +262,20 @@ export default function Dashboard() {
           display: flex;
           justify-content: center;
           gap: 20px;
+          width: 100vw;
+          flex-wrap: wrap;
         }
 
         .sparepart-item {
           text-align: center;
-          background-color: #ffffff;
+          background-color: #ecf0f1;
           border-radius: 10px;
           padding: 20px;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           transition: all 0.3s ease;
           transform: translateY(0);
+          flex: 1 1 calc(33.333% - 40px);
+          margin: 10px;
         }
 
         .sparepart-item:hover {
@@ -267,6 +287,7 @@ export default function Dashboard() {
           border-radius: 8px;
           margin-bottom: 10px;
           transition: transform 0.3s ease;
+          object-fit: cover;
         }
 
         .sparepart-image:hover {
@@ -284,7 +305,7 @@ export default function Dashboard() {
           display: inline-block;
           margin-top: 10px;
           padding: 10px 20px;
-          background-color: #3498db;
+          background-color: #e74c3c;
           color: white;
           text-decoration: none;
           border-radius: 5px;
@@ -292,7 +313,7 @@ export default function Dashboard() {
         }
 
         .detail-link:hover {
-          background-color: #2980b9;
+          background-color: #c0392b;
         }
 
         .hero-container {
@@ -301,27 +322,36 @@ export default function Dashboard() {
           align-items: center;
           gap: 40px;
           margin-top: 40px;
+          width: 100vw;
+          flex-wrap: wrap;
+        }
+
+        .hero {
+          flex: 1 1 60%;
         }
 
         .sidebar {
-          background-color: #ffffff;
+          background-color: #ecf0f1;
           border-radius: 10px;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
           text-align: left;
+          width: 100vw;
+          flex: 1 1 35%;
         }
 
         .catalog {
           padding: 20px;
-          background-color: #f9f9f9;
+          background-color: #ecf0f1;
           border-radius: 10px;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          width: 100vw;
         }
 
         .catalog-items {
           display: flex;
           overflow: hidden;
           position: relative;
-          width: 100%;
+          width: 100vw;
         }
 
         .catalog-item {
@@ -335,6 +365,8 @@ export default function Dashboard() {
         }
 
         .catalog-item img {
+          width: 100%; /* Set the image width to 100% */
+          height: auto; /* Maintain the aspect ratio */
           border-radius: 8px;
           margin-bottom: 10px;
         }
@@ -351,7 +383,7 @@ export default function Dashboard() {
         }
 
         .pagination-btn {
-          background-color: #3498db;
+          background-color: #e74c3c;
           color: white;
           border: none;
           padding: 10px 15px;
@@ -362,11 +394,31 @@ export default function Dashboard() {
         }
 
         .pagination-btn.active {
-          background-color: #2980b9;
+          background-color: #c0392b;
         }
 
         .pagination-btn:hover {
-          background-color: #2980b9;
+          background-color: #c0392b;
+        }
+
+        @media (max-width: 768px) {
+          .sparepart-item {
+            flex: 1 1 calc(50% - 20px);
+          }
+
+          .hero {
+            flex: 1 1 100%;
+          }
+
+          .sidebar {
+            flex: 1 1 100%;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .sparepart-item {
+            flex: 1 1 100%;
+          }
         }
       `}</style>
     </div>
