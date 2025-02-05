@@ -57,14 +57,10 @@ const ProductPage = () => {
   };
 
   const handleLogin = () => {
-    // Implement your login logic here
-    if (loginCredentials.username === 'admin' && loginCredentials.password === 'fastlanegarage') {
-      setIsLoggedIn(true);
-      setIsDeveloper(true);
-      setShowLoginModal(false);
-    } else {
-      alert('Invalid credentials');
-    }
+    // Implement login logic here
+    console.log('Logging in with', loginCredentials);
+    // Close the modal after login
+    setShowLoginModal(false);
   };
 
   const handleLogout = () => {

@@ -188,7 +188,7 @@ export default function Dashboard() {
         .dashboard {
           padding: 0;
           font-family: 'Roboto', sans-serif;
-          background: linear-gradient(to right, #f7f7f7, #e0e0e0);
+          background: linear-gradient(to right, #fffff, #e0e0e0);
           color: #333;
           width: 100vw;
           overflow-x: hidden;
